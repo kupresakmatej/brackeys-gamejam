@@ -1,17 +1,11 @@
 fileFormatVersion: 2
-guid: 1f267d5b8e198e64f867a7b6dfd46f99
+guid: 20192ce0b91005048b0603fc484cf2bd
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
-      74: -4791504522942941401
-    second: Armature|Armature|mixamo.com|Layer0
-  - first:
-      74: -1559071518392153964
-    second: Armature|Cube.001Action
-  - first:
-      74: -8515560403302317629
-    second: Cube.001|Cube.001Action
+      74: 5869890656693009229
+    second: Light|Cube.001Action
   externalObjects: {}
   materials:
     materialImportMode: 2
