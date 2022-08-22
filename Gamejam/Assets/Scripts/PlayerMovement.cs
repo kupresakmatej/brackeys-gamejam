@@ -20,25 +20,30 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    void Update()
     {
-        moveInput = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        float _horizontal = Input.GetAxis("Horizontal");
+        float _vertical = Input.GetAxis("Vertical");
+
+        moveInput = new Vector3(_horizontal, 0, _vertical);
         moveVelocity = Vector3.ClampMagnitude(moveInput, 1.0f) * moveSpeed;
 
-        Ray cameraRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-        float rayLength;
-        
-        if(groundPlane.Raycast(cameraRay, out rayLength))
-        {
-            Vector3 pointToLook = cameraRay.GetPoint(rayLength);
-
-            transform.LookAt(new Vector3(pointToLook.x, transform.position.y, pointToLook.z));
-        }
+        HandleRotation();
     }
 
     void FixedUpdate()
     {
         rb.velocity = moveVelocity;
+    }
+
+    void HandleRotation()
+    {
+        RaycastHit _hit;
+        Ray _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+        if(Physics.Raycast(_ray, out _hit))
+        {
+            transform.LookAt(new Vector3(_hit.point.x, transform.position.y, _hit.point.z));
+        }
     }
 }
