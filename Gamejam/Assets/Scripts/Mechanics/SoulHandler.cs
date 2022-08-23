@@ -19,6 +19,11 @@ public class SoulHandler : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            SoulsBar.lightBar.fillAmount += 10f;
+            SoulsBar.light_left += 10f;
+
+            SoulsBar.vignette.intensity.value = 0.35f;
+
             Destroy(transform.parent.gameObject);
         }
     }

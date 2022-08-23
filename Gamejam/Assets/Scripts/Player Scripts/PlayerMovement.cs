@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.PostProcessing;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -26,18 +28,20 @@ public class PlayerMovement : MonoBehaviour
 
     private Rigidbody rb;
 
-    private Vector3 moveInput;
-    private Vector3 moveVelocity;
-
-    [SerializeField]
-    private Camera mainCamera;
-
-    float horizontalInput;
-    float verticalInput;
-
     public bool isMoving;
 
-    public MovementState state;
+    [Header("Post Processing")]
+    [SerializeField]
+    private GameObject mainCamera;
+    [SerializeField]
+    private Light light;
+    private PostProcessVolume v;
+    private Vignette vignette;
+
+    public static float lightLife;
+    public static float vignetteLife;
+
+    public static MovementState state;
     public enum MovementState
     {
         walking,
@@ -49,7 +53,13 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
+        v = mainCamera.GetComponent<PostProcessVolume>();
+        v.profile.TryGetSettings(out vignette);
+
         isMoving = false;
+
+        lightLife = 2.75f;
+        vignetteLife = 0.35f;
     }
 
     void Update()
@@ -86,6 +96,9 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.sprinting;
             moveSpeed = Mathf.Lerp(moveSpeed, sprintSpeed, .05f);
 
+            light.range = lightLife + 2.25f;
+            vignette.smoothness.value = 0.6f;
+
             anim.SetInteger("Run", 1);
             anim.SetInteger("Walk", 0);
         }
@@ -93,12 +106,19 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.walking;
             moveSpeed = Mathf.Lerp(moveSpeed, walkSpeed, .1f);
+            vignette.intensity.value = SoulsBar.vignette.intensity.value;
+            vignette.smoothness.value = 1f;
+
+            light.range = lightLife;
 
             anim.SetInteger("Walk", 1);
             anim.SetInteger("Run", 0);
         }
         else
         {
+            light.range = lightLife;
+            vignette.intensity.value = SoulsBar.vignette.intensity.value;
+
             anim.SetInteger("Walk", 0);
             anim.SetInteger("Run", 0);
             state = MovementState.idle;

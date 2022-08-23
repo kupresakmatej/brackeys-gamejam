@@ -12,10 +12,13 @@ public class SoulsPickup : MonoBehaviour
 
     private Vector3 velocity = Vector3.zero;
 
+    private bool isInTrigger;
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
+            isInTrigger = true;
             StartCoroutine(MoveToPosition());
         }
     }
@@ -24,6 +27,7 @@ public class SoulsPickup : MonoBehaviour
     {
         if(other.tag == "Player")
         {
+            isInTrigger = false;
             StopCoroutine(MoveToPosition());
         }
     }
@@ -32,7 +36,7 @@ public class SoulsPickup : MonoBehaviour
     {
         float timeSinceStart = 0f;
 
-        while(true)
+        while(isInTrigger)
         {
             timeSinceStart += Time.deltaTime;
 
