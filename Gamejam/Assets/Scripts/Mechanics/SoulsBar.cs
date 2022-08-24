@@ -22,11 +22,11 @@ public class SoulsBar : MonoBehaviour
     private PostProcessVolume v;
     public static Vignette vignette;
     [SerializeField]
-    private Camera mainCamera;
+    private GameObject postProcessing;
 
     void Start()
     {
-        v = mainCamera.GetComponent<PostProcessVolume>();
+        v = postProcessing.GetComponent<PostProcessVolume>();
         v.profile.TryGetSettings(out vignette);
 
         lightBar = GetComponent<Image>();

@@ -32,7 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Post Processing")]
     [SerializeField]
-    private GameObject mainCamera;
+    private GameObject postProcessing;
     [SerializeField]
     private Light light;
     private PostProcessVolume v;
@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
 
-        v = mainCamera.GetComponent<PostProcessVolume>();
+        v = postProcessing.GetComponent<PostProcessVolume>();
         v.profile.TryGetSettings(out vignette);
 
         isMoving = false;
