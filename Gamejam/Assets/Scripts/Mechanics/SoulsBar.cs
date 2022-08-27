@@ -9,7 +9,7 @@ public class SoulsBar : MonoBehaviour
 {
     private const float MAX_LIGHT = 100f;
 
-    public static float light_left = MAX_LIGHT;
+    public static float light_left;
 
     public static Image lightBar;
 
@@ -23,6 +23,11 @@ public class SoulsBar : MonoBehaviour
     public static Vignette vignette;
     [SerializeField]
     private GameObject postProcessing;
+
+     void Awake()
+    {
+        light_left = MAX_LIGHT;
+    }
 
     void Start()
     {

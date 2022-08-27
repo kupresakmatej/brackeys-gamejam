@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Vignette
   m_EditorClassIdentifier: 
   settings:
-  - {fileID: 3268786253186503884}
   - {fileID: 2903433768833427620}
+  - {fileID: 7238573159191637643}
 --- !u!114 &2903433768833427620
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -62,7 +62,7 @@ MonoBehaviour:
   dirtIntensity:
     overrideState: 0
     value: 0
---- !u!114 &3268786253186503884
+--- !u!114 &7238573159191637643
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,13 +79,13 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   mode:
-    overrideState: 1
+    overrideState: 0
     value: 0
   color:
-    overrideState: 1
+    overrideState: 0
     value: {r: 0, g: 0, b: 0, a: 1}
   center:
-    overrideState: 1
+    overrideState: 0
     value: {x: 0.5, y: 0.5}
   intensity:
     overrideState: 1
@@ -100,9 +100,9 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   mask:
-    overrideState: 1
-    value: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
+    overrideState: 0
+    value: {fileID: 0}
     defaultState: 1
   opacity:
-    overrideState: 1
+    overrideState: 0
     value: 1

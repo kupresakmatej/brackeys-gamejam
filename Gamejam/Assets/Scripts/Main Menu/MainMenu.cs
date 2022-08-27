@@ -6,23 +6,24 @@ using UnityEngine.UI;
 
 public class MainMenu : MonoBehaviour
 {
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    private Image black;
+    [SerializeField]
+    private Animator anim;
 
     public void StartGame()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Intro2");
     }
 
     public void QuitGame()
     {
         Application.Quit();
+    }
+
+    IEnumerator Fade()
+    {
+        anim.SetBool("Fade", true);
+        yield return new WaitUntil(() => black.color.a == 1);
     }
 }
