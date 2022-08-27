@@ -14,11 +14,18 @@ public class SoulsPickup : MonoBehaviour
 
     private bool isInTrigger;
 
+    [SerializeField]
+    private AudioSource soulSound;
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
         {
             isInTrigger = true;
+
+            soulSound.volume = 1f;
+            soulSound.Play();
+
             StartCoroutine(MoveToPosition());
         }
     }
@@ -28,8 +35,25 @@ public class SoulsPickup : MonoBehaviour
         if(other.tag == "Player")
         {
             isInTrigger = false;
+
+            StartCoroutine(FadeAudio());
+
             StopCoroutine(MoveToPosition());
         }
+    }
+
+    IEnumerator FadeAudio()
+    {
+        float currentTime = 0;
+
+        float start = soulSound.volume;
+        while (currentTime < 0.3f)
+        {
+            currentTime += Time.deltaTime;
+            soulSound.volume = Mathf.Lerp(start, 0, currentTime / 0.3f);
+            yield return null;
+        }
+        yield break;
     }
 
     IEnumerator MoveToPosition()
