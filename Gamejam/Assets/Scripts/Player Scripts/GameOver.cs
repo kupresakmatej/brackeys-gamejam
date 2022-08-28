@@ -33,6 +33,9 @@ public class GameOver : MonoBehaviour
     [SerializeField]
     private GameObject directionalLight;
 
+    [SerializeField]
+    private GameObject manager;
+
     void Awake()
     {
         lightObj.SetActive(false);
@@ -43,6 +46,8 @@ public class GameOver : MonoBehaviour
         lightSpot.SetActive(true);
         canvasEnd.SetActive(false);
         directionalLight.SetActive(true);
+
+        manager.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -62,6 +67,8 @@ public class GameOver : MonoBehaviour
             lightSpot.SetActive(false);
 
             directionalLight.SetActive(false);
+
+            manager.SetActive(false);
 
             StartCoroutine(EndScreen());
         }
